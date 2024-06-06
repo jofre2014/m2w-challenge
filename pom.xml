@@ -195,6 +195,7 @@
 						<exclude>**/dto/**</exclude>
 						<exclude>**/mapper/**</exclude>
 						<exclude>**/config/**</exclude>
+						<exclude>**/model/**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

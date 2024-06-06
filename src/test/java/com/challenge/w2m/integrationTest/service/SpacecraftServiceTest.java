@@ -16,11 +16,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
@@ -28,6 +30,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
@@ -37,10 +40,7 @@ class SpacecraftServiceTest extends AbstractIntegrationTest {
     private static final int LIMIT= 10;
 
     @Autowired
-    private SpacecraftRepository spacecreaftRepository;
-
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private SpacecraftRepository spacecraftRepository;
 
     @Autowired
     private SpacecraftService spacecraftService;
@@ -63,12 +63,12 @@ class SpacecraftServiceTest extends AbstractIntegrationTest {
                 .build();
 
 
-        spacecreaftRepository.save(spacecraftToSave);
+        spacecraftRepository.save(spacecraftToSave);
     }
 
     @AfterEach
     void cleanUpDatabase() {
-        spacecreaftRepository.deleteAll();
+        spacecraftRepository.deleteAll();
     }
 
 
@@ -153,17 +153,16 @@ class SpacecraftServiceTest extends AbstractIntegrationTest {
     }
 
     @Test
-    void testDelete() {
+    void testDeleteOk() {
+        Long id = 1L;
 
-        SpacecraftResponseDto responseDtoExpected = getResponseDtoExpected();
+        spacecraftService.delete(id);
 
-        spacecraftService.delete(responseDtoExpected.getId());
-
-        assertThrows(NotFoundException.class, () -> spacecraftService.findById(responseDtoExpected.getId()));
+        assertThrows(NotFoundException.class, () -> spacecraftService.findById(id));
     }
 
     private SpacecraftResponseDto getResponseDtoExpected() {
-        Page<SpacecraftResponseDto> spacecraftPage = spacecreaftRepository.findAll(PageRequest.of(0, 10))
+        Page<SpacecraftResponseDto> spacecraftPage = spacecraftRepository.findAll(PageRequest.of(0, 10))
                 .map(spacecraft -> spacecraftMapper.toDto(spacecraft));
 
         SpacecraftResponseDto responseDtoExpected = spacecraftPage.stream().findFirst().get();

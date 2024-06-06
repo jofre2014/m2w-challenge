@@ -1,7 +1,6 @@
 package com.challenge.w2m.controller;
 
 import com.challenge.w2m.dto.ErrorDto;
-import com.challenge.w2m.dto.MediaRequestDto;
 import com.challenge.w2m.dto.UserDto;
 import com.challenge.w2m.dto.UserRequest;
 import com.challenge.w2m.service.impl.SecurityUserDetailService;
