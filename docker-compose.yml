@@ -55,6 +55,9 @@ services:
       POSTGRES_PASSWORD: admin123
       SPRING_DATASOURCE_URL: jdbc:postgresql://db-w2m:5434/w2m
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      USER_ADMIN_PASSWORD: ${USER_ADMIN_PASSWORD}
+      USER_USER1_PASSWORD: ${USER_USER1_PASSWORD}
+      USER_USER2_PASSWORD: ${USER_USER2_PASSWORD}
     depends_on:
       - db-w2m
       - kafka

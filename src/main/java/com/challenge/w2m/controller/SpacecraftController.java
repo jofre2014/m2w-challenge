@@ -1,5 +1,6 @@
 package com.challenge.w2m.controller;
 
+import com.challenge.w2m.dto.ErrorDto;
 import com.challenge.w2m.dto.PaginatedResponseDto;
 import com.challenge.w2m.dto.SpacecraftRequestDto;
 import com.challenge.w2m.dto.SpacecraftResponseDto;
@@ -34,8 +35,12 @@ public class SpacecraftController {
                     content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = SpacecraftResponseDto.class))}
             ),
-            @ApiResponse(responseCode = "404", description = "Spacecraft not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "404", description = "Spacecraft not found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
     })
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -51,8 +56,12 @@ public class SpacecraftController {
     @Operation(summary = "Get a Spacecraft by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Spacecraft found", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = SpacecraftResponseDto.class)) }),
-            @ApiResponse(responseCode = "404", description = "Spacecraft not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "404", description = "Spacecraft not found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
     })
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -63,8 +72,12 @@ public class SpacecraftController {
     @Operation(summary = "Get all Spacecraft that contain in their name the parameter sent ")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Spacecraft found", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = SpacecraftResponseDto.class)) }),
-            @ApiResponse(responseCode = "404", description = "Spacecraft not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "404", description = "Spacecraft not found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
     })
     @GetMapping("/findByName")
     @ResponseStatus(HttpStatus.OK)
@@ -75,8 +88,12 @@ public class SpacecraftController {
     @Operation(summary = "Create a Spacecraft")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201", description = "Spacecraft created"),
-            @ApiResponse(responseCode = "400", description = "Invalid request body"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "400", description = "Invalid request body", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
     })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -89,9 +106,15 @@ public class SpacecraftController {
     @Operation(summary = "Update a Spacecraft")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Spacecraft updated"),
-            @ApiResponse(responseCode = "400", description = "Invalid request body"),
-            @ApiResponse(responseCode = "404", description = "Spacecraft not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "400", description = "Invalid request body", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Spacecraft not found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
     })
     @PutMapping("/{id}")
     public ResponseEntity<SpacecraftResponseDto> update(@PathVariable Long id, @RequestBody SpacecraftRequestDto spacecraftRequestDto) {
@@ -101,8 +124,12 @@ public class SpacecraftController {
     @Operation(summary = "Delete a Spacecraft by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Spacecraft deleted"),
-            @ApiResponse(responseCode = "404", description = "Spacecraft not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "404", description = "Spacecraft not found", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+            })
     })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

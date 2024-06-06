@@ -62,10 +62,14 @@ Para ver todos los usuarios, simplemente es necesario estar autenticado en el si
 
 * **levantar el servicio**:
 
-      `docker-compose up --build`
+      `docker-compose --env-file .env up -d`
 
 Con **docker-compose** se va a levantar la Base de Datos PostgreSQL, Kafka y la Aplicación.
 
+### IMPORTANTE
+**Si al levantar el servicio da error al generar la imagen de la aplicación, generar primero la imagen con este comando:**
+
+    `docker build --network=host --no-cache -t w2m-app .`
 
 ## Swagger
 Al levantar el proyecto, podemos acceder al Swagger desde http://localhost:8080/swagger-ui/index.html#

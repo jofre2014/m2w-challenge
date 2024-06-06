@@ -1,5 +1,7 @@
 package com.challenge.w2m.utils;
 
+import com.challenge.w2m.exception.JsonDeserializationException;
+import com.challenge.w2m.exception.JsonSerializationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonUtils {
@@ -9,7 +11,7 @@ public class JsonUtils {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new JsonSerializationException("Error serializing object to JSON", e);
         }
     }
 
@@ -17,7 +19,7 @@ public class JsonUtils {
         try {
             return objectMapper.readValue(json, clazz);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new JsonDeserializationException("Error deserializing JSON to object", e);
         }
     }
 }
