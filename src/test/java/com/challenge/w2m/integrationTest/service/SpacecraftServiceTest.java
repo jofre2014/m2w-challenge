@@ -145,7 +145,7 @@ class SpacecraftServiceTest extends AbstractIntegrationTest {
         SpacecraftRequestDto updateRequest = new SpacecraftRequestDto();
         updateRequest.setName("Enterprise-D");
         updateRequest.setModel("NCC-1701-D");
-        updateRequest.setMediaId(1l);
+        updateRequest.setMediaId(1L);
 
         SpacecraftResponseDto response = spacecraftService.update(responseDtoExpected.getId(), updateRequest);
 
@@ -154,7 +154,7 @@ class SpacecraftServiceTest extends AbstractIntegrationTest {
 
     @Test
     void testDeleteOk() {
-        Long id = 1L;
+        Long id = getResponseDtoExpected().getId();
 
         spacecraftService.delete(id);
 
